@@ -3,9 +3,17 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/asus/AndroidStudioProjects/TodoList/app/src/main/res/layout/activity_main.xml" value="0.1388888888888889" />
+        <entry key="..\:/Users/asus/AndroidStudioProjects/TodoList/app/src/main/res/drawable/check.xml" value="0.113" />
+        <entry key="..\:/Users/asus/AndroidStudioProjects/TodoList/app/src/main/res/drawable/icon_check.xml" value="0.113" />
+        <entry key="..\:/Users/asus/AndroidStudioProjects/TodoList/app/src/main/res/drawable/icon_cross.xml" value="0.113" />
+        <entry key="..\:/Users/asus/AndroidStudioProjects/TodoList/app/src/main/res/drawable/icon_moon.xml" value="0.113" />
+        <entry key="..\:/Users/asus/AndroidStudioProjects/TodoList/app/src/main/res/drawable/rounded_checkbox.xml" value="0.113" />
+        <entry key="..\:/Users/asus/AndroidStudioProjects/TodoList/app/src/main/res/drawable/rounded_checkbox_selected.xml" value="0.113" />
+        <entry key="..\:/Users/asus/AndroidStudioProjects/TodoList/app/src/main/res/drawable/rounded_checkbox_unselected.xml" value="0.113" />
+        <entry key="..\:/Users/asus/AndroidStudioProjects/TodoList/app/src/main/res/font/fonts.xml" value="0.20925925925925926" />
+        <entry key="..\:/Users/asus/AndroidStudioProjects/TodoList/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/Users/asus/AndroidStudioProjects/TodoList/app/src/main/res/layout/recycler_tasks_item.xml" value="0.1388888888888889" />
-        <entry key="..\:/Users/asus/AndroidStudioProjects/TodoList/app/src/main/res/layout/task_list_item.xml" value="0.2" />
+        <entry key="..\:/Users/asus/AndroidStudioProjects/TodoList/app/src/main/res/layout/task_list_item.xml" value="0.25" />
         <entry key="..\:/Users/asus/AndroidStudioProjects/TodoList/app/src/main/res/layout/tasks_list_item.xml" value="0.1574074074074074" />
       </map>
     </option>

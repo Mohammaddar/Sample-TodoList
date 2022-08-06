@@ -22,11 +22,11 @@
             android:background="@android:color/transparent"
             android:hint="@string/create_a_new_todo"
             android:textSize="12sp"
-            app:layout_constraintEnd_toStartOf="@id/img_remove_task"
+            app:layout_constraintEnd_toStartOf="@id/btn_remove_task"
             app:layout_constraintStart_toEndOf="@id/checkbox_task_completed" />
 
         <ImageView
-            android:id="@+id/img_remove_task"
+            android:id="@+id/btn_remove_task"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginEnd="16dp"
