@@ -14,5 +14,17 @@
     <color name="bright_blue_100">#57ddff</color>
     <color name="purple_100">#c058f3</color>
 
+    <color name="gray_100">#fafafa</color>
+    <color name="gray_blue_100">#e4e5f1</color>
+    <color name="gray_blue_200">#d2d3db</color>
+    <color name="gray_blue_300">#9394a5</color>
+    <color name="gray_blue_400">#484b6a</color>
 
+    <color name="night_blue_900">#161722</color>
+    <color name="night_desaturated_blue">#25273c</color>
+    <color name="night_gray_blue_200">#cacde8</color>
+    <color name="night_gray_blue_100">#e4e5f1</color>
+    <color name="night_gray_blue_300">#777a92</color>
+    <color name="night_gray_blue_400">#4d5066</color>
+    <color name="night_gray_blue_500">#393a4c</color>
 </resources>
