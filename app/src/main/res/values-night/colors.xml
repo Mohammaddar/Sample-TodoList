@@ -15,9 +15,11 @@
     <color name="checkbox_gradient1">#57ddff</color>
     <color name="checkbox_gradient2">#c058f3</color>
 
-    <color name="gray_100">#fafafa</color>
-    <color name="gray_blue_100">#e4e5f1</color>
-    <color name="checkbox_stroke">#d2d3db</color>
-    <color name="gray_blue_300">#9394a5</color>
-    <color name="gray_blue_400">#484b6a</color>
+    <color name="gray_100">#161722</color>
+<!--    <color name="night_desaturated_blue">#25273c</color>-->
+<!--    <color name="night_gray_blue_200">#cacde8</color>-->
+    <color name="gray_blue_400">#e4e5f1</color>
+    <color name="gray_blue_300">#777a92</color>
+    <color name="checkbox_stroke">#393a4c</color>
+    <color name="gray_blue_100">#393a4c</color>
 </resources>

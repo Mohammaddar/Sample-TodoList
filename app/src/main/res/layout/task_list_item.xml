@@ -4,9 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="holder"
             type="com.example.todolist.TaskVH" />
+
         <variable
             name="task"
             type="com.example.todolist.ui.model.TaskUI" />
@@ -14,39 +16,36 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp">
+        android:layout_height="56dp">
 
         <androidx.appcompat.widget.AppCompatCheckBox
             android:id="@+id/checkbox_task_completed"
-            android:layout_width="40dp"
-            android:layout_height="match_parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:checked="@{task.isCompleted}"
-            android:onCheckedChanged="@{(_,isChecked) -> holder.onCheckBoxChangeListener(task.id,isChecked)}"/>
-
-        <TextView
-            android:id="@+id/edt_new_task"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:button="@drawable/rounded_checkbox"
+            android:checked="@{task.isCompleted}"
+            android:onCheckedChanged="@{(_,isChecked) -> holder.onCheckBoxChangeListener(task.id,isChecked)}"
             android:text="@{task.text}"
-            tools:text="Pick up groceries"
-            android:textSize="14sp"
-            android:gravity="center_vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/btn_remove_task"
-            app:layout_constraintStart_toEndOf="@id/checkbox_task_completed" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Pick up groceries"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"/>
 
-        <ImageView
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/btn_remove_task"
-            android:layout_width="12dp"
-            android:layout_height="12dp"
-            android:layout_marginEnd="16dp"
+            style="@style/circleImageView"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginEnd="4dp"
+            android:onClick="@{() -> holder.onRemoveClickListener(task.id)}"
             android:src="@drawable/icon_cross"
+            app:contentPadding="12dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:onClick="@{() -> holder.onRemoveClickListener(task.id)}"/>
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

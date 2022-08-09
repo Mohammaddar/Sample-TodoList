@@ -1,8 +1,10 @@
 package com.example.todolist
 
 import android.os.Bundle
+import android.util.Log
 import android.view.inputmethod.EditorInfo
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -25,6 +27,7 @@ class MainActivity : AppCompatActivity() {
         checkNightMode(applicationContext)
         setupTasksRecycler()
         setupTasksTabLayout()
+
     }
 
     private fun initialize() {

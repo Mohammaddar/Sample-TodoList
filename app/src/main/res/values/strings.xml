@@ -3,4 +3,5 @@
     <string name="create_a_new_todo">Create a new todo</string>
     <string name="drag_and_drop_to_reorder_list">Drag and drop to reorder list</string>
     <string name="clear_completed">Clear Completed</string>
+    <string name="todo">TODO</string>
 </resources>

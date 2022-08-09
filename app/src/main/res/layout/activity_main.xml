@@ -15,33 +15,45 @@
         android:layout_height="match_parent"
         tools:context=".MainActivity">
 
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_30_v"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.28"/>
 
         <ImageView
+            android:id="@+id/img_bg"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="0dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/bg_mobile_light"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:src="@drawable/bg_mobile"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/guideline_30_v"/>
 
         <TextView
             android:id="@+id/txt_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="36dp"
-            android:layout_marginTop="36dp"
-            android:text="To Do"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="56dp"
+            android:text="@string/todo"
             android:textColor="@color/white"
-            android:textSize="32sp"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:letterSpacing="0.3"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/btn_night_mode"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="24dp"
+            style="@style/circleImageView"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginEnd="18dp"
             android:onClick="@{() -> viewModel.onBtnNightModeClicked()}"
-            android:src="@drawable/icon_moon"
+            android:src="@drawable/ic_night_mode"
+            app:contentPadding="6dp"
             app:layout_constraintBottom_toBottomOf="@id/txt_title"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/txt_title" />
@@ -49,21 +61,27 @@
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/card_new_task"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="56dp"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="24dp"
             android:layout_marginEnd="24dp"
-            app:layout_constraintTop_toBottomOf="@id/txt_title">
-
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toTopOf="@id/card_recycler_tasks">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
 
-                <CheckBox
+                <androidx.appcompat.widget.AppCompatCheckBox
                     android:id="@+id/checkbox_new_task_is_completed"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="8dp"
+                    android:button="@drawable/rounded_checkbox"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/btn_remove_task"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:checked="false"/>
 
                 <EditText
                     android:id="@+id/edt_new_task"
@@ -83,10 +101,10 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="24dp"
             android:layout_marginEnd="24dp"
+            android:layout_marginTop="-28dp"
             app:layout_constraintBottom_toTopOf="@id/card_tab_layout"
-            app:layout_constraintTop_toBottomOf="@id/card_new_task">
+            app:layout_constraintTop_toBottomOf="@id/img_bg">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -102,24 +120,33 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/layout_footer"
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
+                    android:layout_height="56dp"
                     app:layout_constraintBottom_toBottomOf="parent">
 
+                    <com.google.android.material.divider.MaterialDivider
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/gray_100"
+                        app:layout_constraintTop_toTopOf="parent"/>
                     <TextView
                         android:id="@+id/txt_task_count"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="24dp"
+                        android:text='@{String.valueOf(viewModel.tasks.size())+" items left"}'
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         tools:text="5 items left"
-                        android:text='@{String.valueOf(viewModel.tasks.size())+" items left"}'/>
+                        android:textStyle="bold"
+                        android:letterSpacing="0"
+                        android:textColor="@color/gray_blue_300"/>
 
                     <Button
                         android:id="@+id/btn_clear_completed"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
                         android:onClick="@{()-> viewModel.onBtnClearCompletedClicked()}"
                         android:text="@string/clear_completed"
                         android:textAllCaps="false"
@@ -127,7 +154,10 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        android:layout_marginEnd="16dp"/>
+                        style="@style/Widget.MaterialComponents.Button.TextButton"
+                        android:textColor="@color/gray_blue_300"
+                        android:textStyle="bold"
+                        android:letterSpacing="0"/>
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.card.MaterialCardView>
@@ -146,30 +176,30 @@
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tab_layout_tasks"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAllCaps="false"
+                android:layout_height="56dp"
                 app:tabGravity="start"
                 app:tabIndicatorColor="@color/transparent"
                 app:tabPadding="4dp"
                 app:tabPaddingEnd="8dp"
                 app:tabPaddingStart="8dp"
                 app:tabRippleColor="@color/transparent"
-                app:tabSelectedTextColor="@color/blue"
+                app:tabSelectedTextColor="@color/bright_blue_300"
                 app:tabTextAppearance="@style/tabLayoutTextApp"
-                app:tabTextColor="@color/gray" />
+                app:tabTextColor="@color/gray"/>
         </com.google.android.material.card.MaterialCardView>
 
         <TextView
             android:id="@+id/txt_reorder_hint"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="48dp"
+            android:layout_marginBottom="64dp"
             android:text="@string/drag_and_drop_to_reorder_list"
-            android:textSize="14sp"
+            android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            android:textColor="@color/gray_blue_300"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
