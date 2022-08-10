@@ -28,5 +28,11 @@ interface TaskDao {
 
     @Query("UPDATE task_table SET isCompleted=:isCompleted WHERE id=:taskId")
     suspend fun update(taskId: Int, isCompleted: Boolean): Int
+
+    @Query("UPDATE task_table SET position=:position WHERE id=:taskId")
+    suspend fun update(taskId: Int, position: Int): Int
+
+    @Query("SELECT MAX(position) From task_table")
+    suspend fun getMaxPosition(): Int
 }
 

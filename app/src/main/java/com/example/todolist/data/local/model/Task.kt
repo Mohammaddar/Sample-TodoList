@@ -13,6 +13,9 @@ data class Task(
     var text:String?,
 
     @ColumnInfo
-    var isCompleted:Boolean
+    var isCompleted:Boolean,
+
+    @ColumnInfo
+    var position:Int
 )
 

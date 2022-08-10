@@ -15,25 +15,7 @@
         <item name="fontFamily">@font/josefinsans_regular</item>
 
         <item name="android:windowTranslucentStatus">true</item>
-    </style>
 
-    <style name="tabLayoutTextApp" parent="TextAppearance.MaterialComponents.Button">
-        <item name="textAllCaps">false</item>
-        <item name="android:textAllCaps">false</item>
-        <item name="android:textSize">14sp</item>
-        <item name="fontFamily">@font/josefinsans_bold</item>
-        <item name="android:fontFamily">@font/josefinsans_bold</item>
-        <item name="android:letterSpacing">0</item>
-    </style>
-
-    <style name="circleImageView" parent="">
-        <item name="android:clickable">true</item>
-        <item name="android:background">?selectableItemBackgroundBorderless</item>
-        <item name="shapeAppearanceOverlay">@style/circleImageViewShape</item>
-    </style>
-
-    <style name="circleImageViewShape" parent="">
-        <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">50%</item>
+        <item name="android:windowAnimationStyle">@style/WindowAnimationTransition</item>
     </style>
 </resources>

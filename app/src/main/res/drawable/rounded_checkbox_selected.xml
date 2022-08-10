@@ -16,4 +16,31 @@
                 android:height="24dp" />
         </shape>
     </item>
+    <item
+        android:top="24.45dp"
+        android:left="20.25dp"
+        android:width="2dp"
+        android:height="5dp">
+        <rotate
+            android:fromDegrees="-45">
+            <shape android:shape="rectangle">
+                <solid android:color="#FFFFFF" />
+
+            </shape>
+        </rotate>
+    </item>
+
+    <item
+        android:top="18.99dp"
+        android:left="25.25dp"
+        android:width="2dp"
+        android:height="10dp">
+        <rotate
+            android:fromDegrees="45">
+            <shape android:shape="rectangle">
+                <solid android:color="#FFFFFF" />
+
+            </shape>
+        </rotate>
+    </item>
 </layer-list>

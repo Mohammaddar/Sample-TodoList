@@ -1,11 +1,11 @@
-package com.example.todolist
+package com.example.todolist.ui.mainactivity
 
 import android.app.Application
-import android.widget.ImageView
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.todolist.data.local.model.Task
+import com.example.todolist.TaskTabLayoutState
+import com.example.todolist.animateNightModeToggle
 import com.example.todolist.data.repo.TaskRepository
 import com.example.todolist.ui.model.TaskUI
 import kotlinx.coroutines.Dispatchers
@@ -25,7 +25,7 @@ class MainActivityViewModel(
 
     val tasks = taskRepository.getAllTasks()
         .map { tasks ->
-            tasks.map { TaskUI.transformDataModelToUiModel(it) }
+            tasks.map { TaskUI.transformDataModelToUiModel(it) }.sortedBy { it.position }
         }
         .combine(tabLayoutState) { tasks, state ->
             when (state) {
@@ -38,12 +38,16 @@ class MainActivityViewModel(
 
     fun onEdtNewTaskAction(text: String, isCompleted: Boolean) {
         viewModelScope.launch {
-            taskRepository.addNewTask(Task(text = text, isCompleted = isCompleted))
+            taskRepository.addNewTask(text = text, isCompleted = isCompleted)
         }
     }
 
-    fun onBtnNightModeClicked() {
-        toggleNightMode(application)
+    fun onBtnNightModeClicked(mainActivity: MainActivity) {
+        animateNightModeToggle(
+            application, mainActivity,
+            mainActivity.binding.btnNightMode.x + mainActivity.binding.btnNightMode.width / 2,
+            mainActivity.binding.btnNightMode.y + mainActivity.binding.btnNightMode.height / 2
+        )
     }
 
     fun onBtnClearCompletedClicked() {
@@ -61,6 +65,12 @@ class MainActivityViewModel(
     fun onCBoxIsTaskCompletedChanged(taskId: Int, isChecked: Boolean) {
         viewModelScope.launch {
             taskRepository.updateTaskState(taskId, isChecked)
+        }
+    }
+
+    fun updateAllTaskPositions(tasks: List<TaskUI>) {
+        viewModelScope.launch {
+            taskRepository.updateAllTasksPositions(tasks.mapIndexed { index, taskUI -> index to taskUI.id })
         }
     }
 

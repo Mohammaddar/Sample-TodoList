@@ -6,21 +6,25 @@
     <data>
 
         <variable
+            name="activity"
+            type="com.example.todolist.ui.mainactivity.MainActivity" />
+
+        <variable
             name="viewModel"
-            type="com.example.todolist.MainActivityViewModel" />
+            type="com.example.todolist.ui.mainactivity.MainActivityViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".MainActivity">
+        tools:context=".ui.mainactivity.MainActivity">
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline_30_v"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.28"/>
+            app:layout_constraintGuide_percent="0.28" />
 
         <ImageView
             android:id="@+id/img_bg"
@@ -28,8 +32,8 @@
             android:layout_height="0dp"
             android:scaleType="centerCrop"
             android:src="@drawable/bg_mobile"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="@id/guideline_30_v"/>
+            app:layout_constraintBottom_toBottomOf="@id/guideline_30_v"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/txt_title"
@@ -37,11 +41,11 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="56dp"
+            android:letterSpacing="0.3"
             android:text="@string/todo"
             android:textColor="@color/white"
             android:textSize="28sp"
             android:textStyle="bold"
-            android:letterSpacing="0.3"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -51,7 +55,9 @@
             android:layout_width="36dp"
             android:layout_height="36dp"
             android:layout_marginEnd="18dp"
-            android:onClick="@{() -> viewModel.onBtnNightModeClicked()}"
+            android:background="@color/transparent"
+            android:clickable="false"
+            android:onClick="@{() -> viewModel.onBtnNightModeClicked(activity)}"
             android:src="@drawable/ic_night_mode"
             app:contentPadding="6dp"
             app:layout_constraintBottom_toBottomOf="@id/txt_title"
@@ -66,6 +72,7 @@
             android:layout_marginEnd="24dp"
             android:layout_marginBottom="16dp"
             app:layout_constraintBottom_toTopOf="@id/card_recycler_tasks">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -77,11 +84,11 @@
                     android:layout_height="match_parent"
                     android:layout_marginStart="8dp"
                     android:button="@drawable/rounded_checkbox"
+                    android:checked="false"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/btn_remove_task"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:checked="false"/>
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <EditText
                     android:id="@+id/edt_new_task"
@@ -92,7 +99,8 @@
                     android:hint="@string/create_a_new_todo"
                     android:imeOptions="actionDone"
                     android:inputType="text"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    android:importantForAutofill="no"/>
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
@@ -101,8 +109,8 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginStart="24dp"
-            android:layout_marginEnd="24dp"
             android:layout_marginTop="-28dp"
+            android:layout_marginEnd="24dp"
             app:layout_constraintBottom_toTopOf="@id/card_tab_layout"
             app:layout_constraintTop_toBottomOf="@id/img_bg">
 
@@ -127,37 +135,38 @@
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:background="@color/gray_100"
-                        app:layout_constraintTop_toTopOf="parent"/>
+                        app:layout_constraintTop_toTopOf="parent" />
+
                     <TextView
                         android:id="@+id/txt_task_count"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="24dp"
+                        android:letterSpacing="0"
                         android:text='@{String.valueOf(viewModel.tasks.size())+" items left"}'
+                        android:textColor="@color/gray_blue_300"
+                        android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        tools:text="5 items left"
-                        android:textStyle="bold"
-                        android:letterSpacing="0"
-                        android:textColor="@color/gray_blue_300"/>
+                        tools:text="5 items left" />
 
                     <Button
                         android:id="@+id/btn_clear_completed"
+                        style="@style/Widget.MaterialComponents.Button.TextButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="16dp"
+                        android:letterSpacing="0"
                         android:onClick="@{()-> viewModel.onBtnClearCompletedClicked()}"
                         android:text="@string/clear_completed"
                         android:textAllCaps="false"
+                        android:textColor="@color/gray_blue_300"
                         android:textSize="12sp"
+                        android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        style="@style/Widget.MaterialComponents.Button.TextButton"
-                        android:textColor="@color/gray_blue_300"
-                        android:textStyle="bold"
-                        android:letterSpacing="0"/>
+                        app:layout_constraintTop_toTopOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.card.MaterialCardView>
@@ -185,7 +194,7 @@
                 app:tabRippleColor="@color/transparent"
                 app:tabSelectedTextColor="@color/bright_blue_300"
                 app:tabTextAppearance="@style/tabLayoutTextApp"
-                app:tabTextColor="@color/gray"/>
+                app:tabTextColor="@color/gray" />
         </com.google.android.material.card.MaterialCardView>
 
         <TextView
@@ -194,12 +203,12 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="64dp"
             android:text="@string/drag_and_drop_to_reorder_list"
+            android:textColor="@color/gray_blue_300"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:textColor="@color/gray_blue_300"/>
+            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

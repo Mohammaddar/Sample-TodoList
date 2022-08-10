@@ -1,15 +1,15 @@
-package com.example.todolist
+package com.example.todolist.ui.mainactivity
 
 import android.os.Bundle
-import android.util.Log
 import android.view.inputmethod.EditorInfo
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.content.res.AppCompatResources
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.todolist.*
 import com.example.todolist.data.repo.TaskRepository
 import com.example.todolist.databinding.ActivityMainBinding
 import com.google.android.material.tabs.TabLayout
@@ -23,18 +23,18 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        initialize()
+        init()
         checkNightMode(applicationContext)
+        setupEdtNewTask()
         setupTasksRecycler()
         setupTasksTabLayout()
-
     }
 
-    private fun initialize() {
+    private fun init() {
         binding = DataBindingUtil.setContentView(
             this, R.layout.activity_main
         )
-        binding.lifecycleOwner=this
+        binding.lifecycleOwner = this
 
         viewModel = ViewModelProvider(
             this,
@@ -44,7 +44,10 @@ class MainActivity : AppCompatActivity() {
             )
         )[MainActivityViewModel::class.java]
         binding.viewModel = viewModel
+        binding.activity=this
+    }
 
+    private fun setupEdtNewTask() {
         binding.edtNewTask.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 viewModel.onEdtNewTaskAction(
@@ -88,9 +91,15 @@ class MainActivity : AppCompatActivity() {
                 viewModel.onBtnRemoveTaskClicked(taskId)
             },
             onCheckBoxChanged = { taskId, isChecked ->
-                viewModel.onCBoxIsTaskCompletedChanged(taskId,isChecked)
+                viewModel.onCBoxIsTaskCompletedChanged(taskId, isChecked)
+            },
+            onRowClearedAfterDrag = {
+                viewModel.updateAllTaskPositions(it)
             }
         )
+
+        val callback: ItemTouchHelper.Callback = ItemMoveCallback(adapter)
+        val touchHelper = ItemTouchHelper(callback)
 
         binding.recyclerTasks.apply {
             this.adapter = adapter
@@ -98,11 +107,12 @@ class MainActivity : AppCompatActivity() {
             lManager.orientation = RecyclerView.VERTICAL
             layoutManager = lManager
             addItemDecoration(DividerItemDecoration(context, lManager.orientation))
+            touchHelper.attachToRecyclerView(this)
         }
 
         viewModel.tasks.observe(this) {
             adapter.submitList(it)
         }
-    }
 
+    }
 }

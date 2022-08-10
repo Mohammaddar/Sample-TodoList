@@ -1,8 +1,10 @@
 package com.example.todolist.data.repo
 
 import android.content.Context
+import androidx.room.withTransaction
 import com.example.todolist.data.local.TaskDatabase
 import com.example.todolist.data.local.model.Task
+import com.example.todolist.ui.model.TaskUI
 import kotlinx.coroutines.flow.Flow
 
 class TaskRepository private constructor(private val taskDataBase: TaskDatabase) {
@@ -33,8 +35,11 @@ class TaskRepository private constructor(private val taskDataBase: TaskDatabase)
         taskDataBase.taskDao.remove(id)
     }
 
-    suspend fun addNewTask(task: Task) {
-        taskDataBase.taskDao.insert(task)
+    suspend fun addNewTask(text:String,isCompleted: Boolean) {
+        taskDataBase.withTransaction {
+            val maxPos=taskDataBase.taskDao.getMaxPosition()
+            taskDataBase.taskDao.insert(Task(text=text, isCompleted = isCompleted, position = maxPos+1))
+        }
     }
 
     suspend fun updateTaskState(taskId: Int, isCompleted: Boolean) {
@@ -43,5 +48,13 @@ class TaskRepository private constructor(private val taskDataBase: TaskDatabase)
 
     suspend fun clearAllCompletedTasks(){
         taskDataBase.taskDao.clearAllCompleted()
+    }
+
+    suspend fun updateAllTasksPositions(tasksIndexed:List<Pair<Int,Int>>){
+        taskDataBase.withTransaction {
+            for (taskIndexed in tasksIndexed) {
+                taskDataBase.taskDao.update(taskIndexed.second,taskIndexed.first)
+            }
+        }
     }
 }
